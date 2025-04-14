@@ -4,12 +4,12 @@ import GitHubIcon from "@/components/icons/github-icon"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { authClient } from "@/lib/auth-client"
-import { toast } from "sonner"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
+import { useForm } from "react-hook-form"
+import { toast } from "sonner"
+import { z } from "zod"
 
 interface User {
 	username: string
@@ -37,27 +37,35 @@ export default function LogIn() {
 function LogInForm() {
 	const router = useRouter()
 
-	const { register, handleSubmit, formState: { errors } } = useForm<User>({
-		resolver: zodResolver(UserSchema)
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<User>({
+		resolver: zodResolver(UserSchema),
 	})
 
-	const onSubmit = (values: User) => toast.promise(async () => {
-		const { data, error } = await authClient.signIn.username({
-			password: values.password,
-			username: values.username
-		})
+	const onSubmit = (values: User) =>
+		toast.promise(
+			async () => {
+				const { data, error } = await authClient.signIn.username({
+					password: values.password,
+					username: values.username,
+				})
 
-		if (error) throw error
+				if (error) throw error
 
-		return data
-	}, {
-		loading: "Login user...",
-		success: (data) => {
-			router.push("/feed")
-			return `Welcome back, ${data.user.username}`
-		},
-		error: (error) => `Oopss, an error occurs: ${error.message}`
-	})
+				return data
+			},
+			{
+				loading: "Login user...",
+				success: (data) => {
+					router.push("/feed")
+					return `Welcome back, ${data.user.username}`
+				},
+				error: (error) => `Oopss, an error occurs: ${error.message}`,
+			},
+		)
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-2">
@@ -65,14 +73,27 @@ function LogInForm() {
 				<div className="space-y-2">
 					<div className="flex flex-col gap-y-1">
 						<Label htmlFor="username">Username</Label>
-						<Input id="username" type="text" placeholder="bdemxn" {...register("username")} />
-						{errors.username && <span className="text-red-500 text-sm">{errors.username.message}</span>}
+						<Input
+							id="username"
+							type="text"
+							placeholder="bdemxn"
+							{...register("username")}
+						/>
+						{errors.username && (
+							<span className="text-red-500 text-sm">
+								{errors.username.message}
+							</span>
+						)}
 					</div>
 
 					<div className="flex flex-col gap-y-1">
 						<Label htmlFor="password">Password</Label>
 						<Input id="password" type="password" {...register("password")} />
-						{errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
+						{errors.password && (
+							<span className="text-red-500 text-sm">
+								{errors.password.message}
+							</span>
+						)}
 					</div>
 				</div>
 
@@ -85,16 +106,24 @@ function LogInForm() {
 				</span>
 			</div>
 
-			<Button type="button" onClick={() => {
-				toast.promise(async () => {
-					await authClient.signIn.social({
-						provider: "github"
-					})
-				}, {
-					loading: "Creating user...",
-					error: (error) => `Oops, error: ${error}`
-				})
-			}}>Continue with Github <GitHubIcon /></Button>
+			<Button
+				type="button"
+				onClick={() => {
+					toast.promise(
+						async () => {
+							await authClient.signIn.social({
+								provider: "github",
+							})
+						},
+						{
+							loading: "Creating user...",
+							error: (error) => `Oops, error: ${error}`,
+						},
+					)
+				}}
+			>
+				Continue with Github <GitHubIcon />
+			</Button>
 		</form>
 	)
 }
