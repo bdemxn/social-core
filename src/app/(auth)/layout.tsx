@@ -1,9 +1,6 @@
 import { AuthErrorBoundary as AuthLayoutComponent } from "@/layouts/error-boundary"
+import type { ComponentProps } from "@/types/components"
 
-type AuthLayoutProps = {
-	children: React.ReactNode
-}
-
-export default function AuthLayout({ children }: AuthLayoutProps) {
+export default function AuthLayout({ children }: ComponentProps) {
 	return <AuthLayoutComponent>{children}</AuthLayoutComponent>
 }
