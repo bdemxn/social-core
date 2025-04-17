@@ -25,8 +25,8 @@ export default function LogIn() {
 	return (
 		<div>
 			<section className="text-center">
-				<p className="font-semibold text-lg">Welcome to Social Core</p>
-				<p className="text-sm">Are you new? Let's start</p>
+				<p className="font-semibold text-lg">Welcome back to Social Core</p>
+				<p className="text-sm">Connect with new people</p>
 			</section>
 
 			<LogInForm />

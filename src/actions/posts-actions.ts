@@ -3,7 +3,7 @@
 import { db } from "@/config/db"
 import { auth } from "@/lib/auth"
 import { post, user } from "@/schemas"
-import { eq } from "drizzle-orm"
+import { desc, eq } from "drizzle-orm"
 import { headers } from "next/headers"
 
 export async function createPost(content: string) {
@@ -40,7 +40,7 @@ export async function getAllPosts() {
 			})
 			.from(post)
 			.innerJoin(user, eq(post.userId, user.id))
-			.orderBy(post.createdAt)
+			.orderBy(desc(post.createdAt))
 
 		return posts
 	} catch (err) {
@@ -50,7 +50,23 @@ export async function getAllPosts() {
 
 export async function getPostsByUserId(userId: string) {
 	try {
-		const posts = await db.select().from(post).where(eq(post.userId, userId))
+		const posts = await db
+			.select({
+				id: post.id,
+				content: post.content,
+				createdAt: post.createdAt,
+				user: {
+					id: user.id,
+					name: user.name,
+					username: user.username,
+					displayname: user.displayUsername,
+				},
+			})
+			.from(post)
+			.where(eq(post.userId, userId))
+			.innerJoin(user, eq(post.userId, user.id))
+			.orderBy(desc(post.createdAt))
+
 		return posts
 	} catch (error) {
 		throw Error.prototype.message
