@@ -2,20 +2,20 @@
 
 import { getAllPosts } from "@/actions/posts-actions"
 import { accountRegistered } from "@/actions/profile-actions"
-import { Button } from "@/components/ui/button"
-import { useRouter } from "next/navigation"
-import GitHubIcon from "@/components/icons/github-icon"
 import Navbar from "@/components/app/navbar"
-import LinkedInIcon from "@/components/icons/linkedin-icon"
-import Link from "next/link"
-import useSWR from "swr"
-import { GeistSans } from 'geist/font/sans'
-import TursoIcon from "@/components/icons/turso-icon"
 import BetterAuthIcon from "@/components/icons/better-auth-icon"
-import NextjsIcon from "@/components/icons/nextjs-icon"
-import TypeScriptIcon from "@/components/icons/typescript-icon"
 import DrizzleORMIcon from "@/components/icons/drizzle-icon"
+import GitHubIcon from "@/components/icons/github-icon"
+import LinkedInIcon from "@/components/icons/linkedin-icon"
+import NextjsIcon from "@/components/icons/nextjs-icon"
+import TursoIcon from "@/components/icons/turso-icon"
+import TypeScriptIcon from "@/components/icons/typescript-icon"
 import ZodIcon from "@/components/icons/zod-icon"
+import { Button } from "@/components/ui/button"
+import { GeistSans } from "geist/font/sans"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import useSWR from "swr"
 
 export default function Home() {
 	const router = useRouter()
@@ -28,47 +28,64 @@ export default function Home() {
 				<Navbar />
 
 				<section className="md:mx-auto mx-5 md:w-[800px] mt-[5rem]">
-
 					<section>
-						<h1 className="text-3xl font-semibold text-pretty">Discover a Minimalist, Distraction-Free Social Network✨</h1>
-						<h2 className="text-neutral-500 text-wrap">Clean design. No clutter. Real connections.</h2>
+						<h1 className="text-3xl font-semibold text-pretty">
+							Discover a Minimalist, Distraction-Free Social Network✨
+						</h1>
+						<h2 className="text-neutral-500 text-wrap">
+							Clean design. No clutter. Real connections.
+						</h2>
 
-						<Button className="mx-auto mt-[1rem]" onClick={() => router.push("/register")}>Join Now</Button>
+						<Button
+							className="mx-auto mt-[1rem]"
+							onClick={() => router.push("/register")}
+						>
+							Join Now
+						</Button>
 					</section>
 
 					<section className="mt-[5rem]">
-						<h2 className="text-xl font-semibold text-pretty">Say Hello World or Anything Else💃</h2>
+						<h2 className="text-xl font-semibold text-pretty">
+							Say Hello World or Anything Else💃
+						</h2>
 
 						<div>
-							<h3 className="text-neutral-500 text-wrap">Connect with <b>{profilesCreated?.length} users</b> around the world. And interact with more than <b>{postsCreated?.length} posts🔥</b></h3>
+							<h3 className="text-neutral-500 text-wrap">
+								Connect with <b>{profilesCreated?.length} users</b> around the
+								world. And interact with more than{" "}
+								<b>{postsCreated?.length} posts🔥</b>
+							</h3>
 						</div>
 					</section>
 
 					<div className="mt-[5rem]">
-						<h2 className="text-xl font-semibold text-pretty">Crafted with powerful tools⚡</h2>
-						<h3 className="text-neutral-500 text-wrap">Big ideas need big technologies with high performance</h3>
+						<h2 className="text-xl font-semibold text-pretty">
+							Crafted with powerful tools⚡
+						</h2>
+						<h3 className="text-neutral-500 text-wrap">
+							Big ideas need big technologies with high performance
+						</h3>
 						<div className="flex items-center justify-between gap-x-4 mt-4">
-							{
-								iconList.map(({ name, icon: Icon }) => (
-									<Icon key={name} className="size-10"/>
-								))
-							}
+							{iconList.map(({ name, icon: Icon }) => (
+								<Icon key={name} className="size-10" />
+							))}
 						</div>
 					</div>
 				</section>
 			</main>
 
 			<footer className="">
-
 				<div className="md:w-[800px] mx-5 md:mx-auto mt-[10rem] py-10 md:py-1 flex gap-x-2 items-center justify-between">
-					<p className={`${GeistSans.className} text-sm`}>Made by Kevin Bonilla</p>
+					<p className={`${GeistSans.className} text-sm`}>
+						Made by Kevin Bonilla
+					</p>
 
 					<div className="flex gap-x-2">
-						{
-							footerLinks.map(({ href, icon: Icon }) => (
-								<Link href={href} key={href}><Icon className="size-5" /></Link>
-							))
-						}
+						{footerLinks.map(({ href, icon: Icon }) => (
+							<Link href={href} key={href}>
+								<Icon className="size-5" />
+							</Link>
+						))}
 					</div>
 				</div>
 			</footer>
@@ -79,37 +96,37 @@ export default function Home() {
 const footerLinks = [
 	{
 		href: "https://www.linkedin.com/in/kb1909zzz/",
-		icon: LinkedInIcon
+		icon: LinkedInIcon,
 	},
 	{
 		href: "https://github.com/bdemxn",
-		icon: GitHubIcon
-	}
+		icon: GitHubIcon,
+	},
 ]
 
 const iconList = [
 	{
 		name: "TypeScript",
-		icon: TypeScriptIcon
+		icon: TypeScriptIcon,
 	},
 	{
 		name: "Next.js",
-		icon: NextjsIcon
+		icon: NextjsIcon,
 	},
 	{
 		name: "Better-Auth",
-		icon: BetterAuthIcon
+		icon: BetterAuthIcon,
 	},
 	{
 		name: "Turso",
-		icon: TursoIcon
+		icon: TursoIcon,
 	},
 	{
 		name: "DrizzleORM",
-		icon: DrizzleORMIcon
+		icon: DrizzleORMIcon,
 	},
 	{
 		name: "Zod",
-		icon: ZodIcon
+		icon: ZodIcon,
 	},
 ]

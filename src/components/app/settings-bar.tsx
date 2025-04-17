@@ -165,7 +165,10 @@ function PasswordSettings() {
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className="grid gap-4 p-4">
 				<div className="grid grid-cols-4 items-center gap-4">
-					<Label htmlFor="current-password" className="text-right text-xs md:text-base">
+					<Label
+						htmlFor="current-password"
+						className="text-right text-xs md:text-base"
+					>
 						Current Password
 					</Label>
 					<Input
@@ -181,7 +184,10 @@ function PasswordSettings() {
 					)}
 				</div>
 				<div className="grid grid-cols-4 items-center gap-4">
-					<Label htmlFor="new-password" className="text-right text-xs md:text-base">
+					<Label
+						htmlFor="new-password"
+						className="text-right text-xs md:text-base"
+					>
 						New Password
 					</Label>
 					<Input
